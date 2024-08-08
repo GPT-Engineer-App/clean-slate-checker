@@ -27,8 +27,8 @@ const SubmissionForm = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      if (file.size > 5 * 1024 * 1024) {
-        setFileError('File size should not exceed 5MB');
+      if (file.size > 50 * 1024 * 1024) {
+        setFileError('File size should not exceed 50MB');
         return;
       }
       if (!['image/jpeg', 'image/png', 'image/gif'].includes(file.type)) {
@@ -88,10 +88,10 @@ const SubmissionForm = () => {
         </Select>
       </div>
       <div className="space-y-2">
-        <Label htmlFor="evidence">Evidence (Screenshot)</Label>
+        <Label htmlFor="evidence">Evidence ((Scrolling) Screenshots)</Label>
         <Input id="evidence" name="evidence" type="file" onChange={handleFileChange} accept="image/jpeg,image/png,image/gif" required />
         {fileError && <p className="text-red-500 text-sm mt-1">{fileError}</p>}
-        <p className="text-sm text-gray-500 mt-1">Max file size: 5MB. Allowed formats: JPEG, PNG, GIF</p>
+        <p className="text-sm text-gray-500 mt-1">Max file size: 50MB. Allowed formats: JPEG, PNG, GIF</p>
       </div>
       <Button type="submit" className="w-full" disabled={!!fileError}>Submit for Review</Button>
     </form>
