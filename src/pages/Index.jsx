@@ -29,9 +29,12 @@ const Index = () => {
             </TabsContent>
           </Tabs>
         </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button variant="outline" onClick={() => setActiveTab("submit")}>Submit New Entry</Button>
-          <Button variant="outline" onClick={() => setActiveTab("lookup")}>Lookup Names</Button>
+        <CardFooter className="flex flex-col space-y-4">
+          <Button variant="outline" onClick={() => setActiveTab("submit")} className="w-full">Submit New Entry</Button>
+          <Button variant="outline" onClick={() => setActiveTab("lookup")} className="w-full">Lookup Name</Button>
+          <a href="https://wise.com/pay/r/RSDBM2ru-fmLOOI" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+            Make a payment
+          </a>
         </CardFooter>
       </Card>
     </div>

@@ -5,51 +5,42 @@ import { Label } from "@/components/ui/label"
 import { toast } from "sonner"
 
 const LookupForm = () => {
-  const [names, setNames] = useState('');
-  const [results, setResults] = useState(null);
+  const [name, setName] = useState('');
+  const [result, setResult] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const nameList = names.split(',').map(name => name.trim());
-    const cost = nameList.length;
     
     // Here you would typically send a request to your backend
     // For now, we'll simulate a response
-    const mockResults = nameList.map(name => ({
-      name,
-      inDatabase: Math.random() > 0.5
-    }));
+    const inDatabase = Math.random() > 0.5;
 
-    setResults(mockResults);
-    toast.success(`Lookup complete. Cost: ${cost} euro${cost > 1 ? 's' : ''}.`);
+    setResult({ name, inDatabase });
+    toast.success(`Lookup complete. Cost: 1 euro.`);
   };
 
   return (
     <div className="space-y-4">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="names">Names to Lookup (comma-separated)</Label>
+          <Label htmlFor="name">Name to Lookup</Label>
           <Input 
-            id="names" 
-            value={names} 
-            onChange={(e) => setNames(e.target.value)} 
-            placeholder="John Doe, Jane Smith"
+            id="name" 
+            value={name} 
+            onChange={(e) => setName(e.target.value)} 
+            placeholder="John Doe"
             required 
           />
         </div>
-        <Button type="submit" className="w-full">Lookup (1€ per name)</Button>
+        <Button type="submit" className="w-full">Lookup (1€)</Button>
       </form>
       
-      {results && (
+      {result && (
         <div className="mt-4">
-          <h3 className="text-lg font-semibold mb-2">Results:</h3>
-          <ul className="list-disc pl-5">
-            {results.map((result, index) => (
-              <li key={index}>
-                {result.name}: {result.inDatabase ? "Found in database" : "Not found"}
-              </li>
-            ))}
-          </ul>
+          <h3 className="text-lg font-semibold mb-2">Result:</h3>
+          <p>
+            {result.name}: {result.inDatabase ? "Found in database" : "Not found"}
+          </p>
         </div>
       )}
     </div>
