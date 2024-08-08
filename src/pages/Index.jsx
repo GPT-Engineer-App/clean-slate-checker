@@ -12,7 +12,7 @@ const Index = () => {
       return (
         <div className="space-y-4">
           <CardTitle className="text-center">What would you like to do?</CardTitle>
-          <div className="flex flex-col space-y-4">
+          <div className="flex justify-center space-x-4">
             <Button onClick={() => setSelectedAction('lookup')}>Look somebody up</Button>
             <Button onClick={() => setSelectedAction('report')}>Report somebody</Button>
           </div>
@@ -27,22 +27,18 @@ const Index = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
       <Card className="w-full max-w-2xl">
         <CardHeader>
-          <CardTitle>No-show Protector</CardTitle>
-          <CardDescription>Cleaner Edition</CardDescription>
-          <CardDescription className="mt-2">Submit or lookup cleaner information</CardDescription>
+          <CardTitle className="text-center">No-show Protector</CardTitle>
+          <CardDescription className="text-center">Cleaner Edition</CardDescription>
         </CardHeader>
         <CardContent>
           {renderContent()}
         </CardContent>
-        <CardFooter className="flex flex-col space-y-4">
+        <CardFooter className="flex justify-center">
           {selectedAction && (
-            <Button variant="outline" onClick={() => setSelectedAction(null)} className="w-full">
+            <Button variant="outline" onClick={() => setSelectedAction(null)}>
               Back to Selection
             </Button>
           )}
-          <a href="https://wise.com/pay/r/RSDBM2ru-fmLOOI" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-            Make a payment
-          </a>
         </CardFooter>
       </Card>
     </div>
