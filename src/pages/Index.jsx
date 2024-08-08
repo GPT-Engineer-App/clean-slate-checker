@@ -1,12 +1,27 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import SubmissionForm from '../components/SubmissionForm';
 import LookupForm from '../components/LookupForm';
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState("submit");
+  const [selectedAction, setSelectedAction] = useState(null);
+
+  const renderContent = () => {
+    if (!selectedAction) {
+      return (
+        <div className="space-y-4">
+          <CardTitle className="text-center">What would you like to do?</CardTitle>
+          <div className="flex flex-col space-y-4">
+            <Button onClick={() => setSelectedAction('lookup')}>Look somebody up</Button>
+            <Button onClick={() => setSelectedAction('report')}>Report somebody</Button>
+          </div>
+        </div>
+      );
+    }
+
+    return selectedAction === 'lookup' ? <LookupForm /> : <SubmissionForm />;
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
@@ -16,22 +31,14 @@ const Index = () => {
           <CardDescription>Submit or lookup cleaner information</CardDescription>
         </CardHeader>
         <CardContent>
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="submit">Submit Entry</TabsTrigger>
-              <TabsTrigger value="lookup">Lookup</TabsTrigger>
-            </TabsList>
-            <TabsContent value="submit">
-              <SubmissionForm />
-            </TabsContent>
-            <TabsContent value="lookup">
-              <LookupForm />
-            </TabsContent>
-          </Tabs>
+          {renderContent()}
         </CardContent>
         <CardFooter className="flex flex-col space-y-4">
-          <Button variant="outline" onClick={() => setActiveTab("submit")} className="w-full">Submit New Entry</Button>
-          <Button variant="outline" onClick={() => setActiveTab("lookup")} className="w-full">Lookup Name</Button>
+          {selectedAction && (
+            <Button variant="outline" onClick={() => setSelectedAction(null)} className="w-full">
+              Back to Selection
+            </Button>
+          )}
           <a href="https://wise.com/pay/r/RSDBM2ru-fmLOOI" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
             Make a payment
           </a>
