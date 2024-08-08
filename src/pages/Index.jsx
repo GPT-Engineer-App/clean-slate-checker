@@ -1,44 +1,24 @@
-import { useState } from 'react';
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import SubmissionForm from '../components/SubmissionForm';
 import LookupForm from '../components/LookupForm';
 
 const Index = () => {
-  const [selectedAction, setSelectedAction] = useState(null);
-
-  const renderContent = () => {
-    if (!selectedAction) {
-      return (
-        <div className="space-y-4">
-          <CardTitle className="text-center">What would you like to do?</CardTitle>
-          <div className="flex justify-center space-x-4">
-            <Button onClick={() => setSelectedAction('lookup')}>Look somebody up</Button>
-            <Button onClick={() => setSelectedAction('report')}>Report somebody</Button>
-          </div>
-        </div>
-      );
-    }
-
-    return selectedAction === 'lookup' ? <LookupForm /> : <SubmissionForm />;
-  };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <Card className="w-full max-w-2xl">
+      <Card className="w-full max-w-6xl">
         <CardHeader>
           <CardTitle className="text-center">No-show Protector</CardTitle>
         </CardHeader>
-        <CardContent>
-          {renderContent()}
+        <CardContent className="flex flex-col md:flex-row gap-8">
+          <div className="flex-1">
+            <h2 className="text-xl font-semibold mb-4">Look somebody up</h2>
+            <LookupForm />
+          </div>
+          <div className="flex-1">
+            <h2 className="text-xl font-semibold mb-4">Report somebody</h2>
+            <SubmissionForm />
+          </div>
         </CardContent>
-        <CardFooter className="flex justify-center">
-          {selectedAction && (
-            <Button variant="outline" onClick={() => setSelectedAction(null)}>
-              Back to Selection
-            </Button>
-          )}
-        </CardFooter>
       </Card>
     </div>
   );
