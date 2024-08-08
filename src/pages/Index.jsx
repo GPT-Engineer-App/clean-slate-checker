@@ -27,8 +27,9 @@ const Index = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
       <Card className="w-full max-w-2xl">
         <CardHeader>
-          <CardTitle>Cleaner Verification System</CardTitle>
-          <CardDescription>Submit or lookup cleaner information</CardDescription>
+          <CardTitle>No-show Protector</CardTitle>
+          <CardDescription>Cleaner Edition</CardDescription>
+          <CardDescription className="mt-2">Submit or lookup cleaner information</CardDescription>
         </CardHeader>
         <CardContent>
           {renderContent()}
