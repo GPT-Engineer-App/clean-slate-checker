@@ -88,7 +88,7 @@ const SubmissionForm = () => {
         </Select>
       </div>
       <div className="space-y-2">
-        <Label htmlFor="evidence">Evidence ((Scrolling) Screenshots)</Label>
+        <Label htmlFor="evidence">Evidence (Scrolling Screenshots)</Label>
         <Input id="evidence" name="evidence" type="file" onChange={handleFileChange} accept="image/jpeg,image/png,image/gif" required />
         {fileError && <p className="text-red-500 text-sm mt-1">{fileError}</p>}
         <p className="text-sm text-gray-500 mt-1">Max file size: 50MB. Allowed formats: JPEG, PNG, GIF</p>
