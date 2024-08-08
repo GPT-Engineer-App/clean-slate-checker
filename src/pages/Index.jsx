@@ -28,7 +28,6 @@ const Index = () => {
       <Card className="w-full max-w-2xl">
         <CardHeader>
           <CardTitle className="text-center">No-show Protector</CardTitle>
-          <CardDescription className="text-center">Cleaner Edition</CardDescription>
         </CardHeader>
         <CardContent>
           {renderContent()}
