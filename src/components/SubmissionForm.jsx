@@ -14,6 +14,7 @@ const SubmissionForm = () => {
     reason: '',
     evidence: null
   });
+  const [fileError, setFileError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,10 +25,22 @@ const SubmissionForm = () => {
   };
 
   const handleFileChange = (e) => {
-    setFormData(prevState => ({
-      ...prevState,
-      evidence: e.target.files[0]
-    }));
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        setFileError('File size should not exceed 5MB');
+        return;
+      }
+      if (!['image/jpeg', 'image/png', 'image/gif'].includes(file.type)) {
+        setFileError('Only JPEG, PNG, and GIF images are allowed');
+        return;
+      }
+      setFileError('');
+      setFormData(prevState => ({
+        ...prevState,
+        evidence: file
+      }));
+    }
   };
 
   const handleSubmit = (e) => {
@@ -76,9 +89,11 @@ const SubmissionForm = () => {
       </div>
       <div className="space-y-2">
         <Label htmlFor="evidence">Evidence (Screenshot)</Label>
-        <Input id="evidence" name="evidence" type="file" onChange={handleFileChange} accept="image/*" required />
+        <Input id="evidence" name="evidence" type="file" onChange={handleFileChange} accept="image/jpeg,image/png,image/gif" required />
+        {fileError && <p className="text-red-500 text-sm mt-1">{fileError}</p>}
+        <p className="text-sm text-gray-500 mt-1">Max file size: 5MB. Allowed formats: JPEG, PNG, GIF</p>
       </div>
-      <Button type="submit" className="w-full">Submit for Review</Button>
+      <Button type="submit" className="w-full" disabled={!!fileError}>Submit for Review</Button>
     </form>
   );
 };
